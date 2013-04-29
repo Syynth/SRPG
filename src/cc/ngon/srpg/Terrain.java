@@ -4,10 +4,12 @@
  */
 package cc.ngon.srpg;
 
+import cc.ngon.srpg.gfx.*;
 
-public class Terrain {
 
-    public Terrain(Map m, boolean passable, float z, float delay) {
+public class Terrain extends Node  {
+
+    public Terrain(Map m, float x, float y, float z, boolean passable, float delay) {
         this.m = m;
         this.passable = passable;
         this.z = z;
@@ -15,8 +17,11 @@ public class Terrain {
     }
     
     protected boolean passable;
-    protected float z;
     protected float delay;
+    
+    protected float x;
+    protected float y;
+    protected float z;
     
     protected Map m;
     
