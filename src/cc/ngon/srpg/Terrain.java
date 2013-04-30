@@ -13,11 +13,12 @@ public class Terrain extends Node  {
         this.m = m;
         this.passable = passable;
         this.z = z;
-        this.delay = delay;
+        this.impediment = impediment;
     }
     
     protected boolean passable;
-    protected float delay;
+    protected float impediment;
+    
     
     protected float x;
     protected float y;

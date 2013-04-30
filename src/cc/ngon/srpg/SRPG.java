@@ -5,6 +5,7 @@
 package cc.ngon.srpg;
 
 import cc.ngon.Config;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lwjgl.LWJGLException;
@@ -34,8 +35,11 @@ public class SRPG {
     
     public void execute() {
         
+        Map m = MapBuilder.loadMapFromCSV(new File("res/lev/level0.csv"));
+        
         while (!Display.isCloseRequested()) {
-            
+            m.update();
+            m.render();
             Display.update();
             Display.sync(fps);
         }
