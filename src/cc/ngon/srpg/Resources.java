@@ -19,6 +19,14 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
 public final class Resources {
+    
+    public static Texture getTexture(String key) {
+        return texs.get(key);
+    }
+    
+    public static Mesh getMesh(String key) {
+        return meshes.get(key);
+    }
 
     public static void loadAllFiles() {
         File texDir = new File("res/tex/");
