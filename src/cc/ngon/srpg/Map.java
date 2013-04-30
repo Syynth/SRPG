@@ -4,6 +4,8 @@
  */
 package cc.ngon.srpg;
 
+import cc.ngon.srpg.gfx.Camera;
+
 public class Map {
 
     public Map(int width, int height) {
@@ -12,12 +14,14 @@ public class Map {
 
         field = new Terrain[width][height];
         actors = new Entity[width][height];
+        camera = new Camera();
     }
 
     public void update() {
     }
 
     public void render() {
+        camera.renderMap(this);
     }
 
     public int width() {
@@ -27,8 +31,11 @@ public class Map {
     public int height() {
         return height;
     }
-    protected Terrain[][] field;
-    protected Entity[][] actors;
+    
+    public Terrain[][] field;
+    public Entity[][] actors;
     protected int width;
     protected int height;
+    protected Camera camera;
+    
 }

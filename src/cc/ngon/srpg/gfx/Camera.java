@@ -4,8 +4,10 @@
  */
 package cc.ngon.srpg.gfx;
 
+import cc.ngon.srpg.*;
 import org.lwjgl.util.vector.Vector3f;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.util.glu.GLU.*;
 
 public class Camera {
     
@@ -51,7 +53,16 @@ public class Camera {
         return this;
     }
     
-    public Camera apply() {
+    public Camera initGL() {
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        gluPerspective(angle, aspect, znear, zfar);
+        glMatrixMode(GL_MODELVIEW);
+        glEnable(GL_DEPTH_TEST);
+        return this;
+    }
+    
+    public Camera renderMap(Map m) {
         glLoadIdentity();
         glRotatef(rotation.x, 1, 0, 0);
         glRotatef(rotation.y, 0, 1, 0);
