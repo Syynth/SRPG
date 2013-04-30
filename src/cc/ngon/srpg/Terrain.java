@@ -10,15 +10,19 @@ import org.lwjgl.util.vector.Vector3f;
 public class Terrain extends Node {
 
     public Terrain(Map m, Vector3f position, boolean weather, float impediment, float defense) {
-        this.map = m;
-        this.info = new TerrainInfo(impediment, defense, weather);
-        this.position = position;
+        this(m, new TerrainInfo(impediment, defense, weather), position);
     }
     
     public Terrain(Map m, TerrainInfo t, Vector3f position) {
         this.map = m;
         this.info = t;
         this.position = position;
+        this.mesh = genMesh();
+    }
+    
+    private Mesh genMesh() {
+        Mesh m = new Mesh();
+        return m;
     }
 
     TerrainInfo info;

@@ -6,7 +6,7 @@ package cc.ngon.srpg.gfx;
 
 public class Node {
 
-    protected Mesh mesh;
-    protected Material material;
+    public Mesh mesh;
+    public Material material;
     
 }
