@@ -27,7 +27,7 @@ public abstract class MapBuilder {
             }
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("t ")) {
-                    m.field[i(line.split(" ")[1])][i(line.split(" ")[2])] = getNewTerrain(line, m);
+                    m.field[(int)f(line.split(" ")[1])][(int)f(line.split(" ")[2])] = getNewTerrain(line, m);
                 }
             }
             
@@ -47,7 +47,7 @@ public abstract class MapBuilder {
         Vector3f pos = new Vector3f(Float.valueOf(s.split(" ")[2]),
                                     Float.valueOf(s.split(" ")[3]),
                                     Float.valueOf(s.split(" ")[4]));
-        int type = Integer.parseInt(s.split(" ")[0]);
+        int type = Integer.parseInt(s.split(" ")[1]);
         Terrain.TerrainInfo ti;
         switch (type) {
             case Terrain.FLOOR_ID: ti = Terrain.FLOOR_INFO; break;
@@ -59,6 +59,10 @@ public abstract class MapBuilder {
             default: ti = Terrain.FLOOR_INFO; break;
         }
         return new Terrain(m, ti, pos);
+    }
+    
+    private static float f(String s) {
+        return Float.parseFloat(s);
     }
     
     private static int i(String s) {
