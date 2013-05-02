@@ -69,6 +69,7 @@ public class Camera {
         glRotatef(rotation.y, 0, 1, 0);
         glRotatef(rotation.z, 0, 0, 1);
         glTranslatef(position.x, position.y, position.z);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         for (Terrain tr[] : m.field) {
             for (Terrain t : tr) {
                 if (t != null) {
