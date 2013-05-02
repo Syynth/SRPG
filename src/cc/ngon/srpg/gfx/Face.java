@@ -10,9 +10,9 @@ public class Face {
 
     public Vector3f v;
     public Vector3f n;
-    public Vector2f t;
+    public Vector3f t;
     
-    public Face(Vector3f vertexIndex, Vector3f normalIndex, Vector2f texIndex) {
+    public Face(Vector3f vertexIndex, Vector3f normalIndex, Vector3f texIndex) {
         v = vertexIndex;
         n = normalIndex;
         t = texIndex;

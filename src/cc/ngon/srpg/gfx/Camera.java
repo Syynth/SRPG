@@ -8,6 +8,7 @@ import cc.ngon.srpg.*;
 import org.lwjgl.util.vector.Vector3f;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.*;
+import org.lwjgl.util.vector.Vector2f;
 
 public class Camera {
     
@@ -68,6 +69,29 @@ public class Camera {
         glRotatef(rotation.y, 0, 1, 0);
         glRotatef(rotation.z, 0, 0, 1);
         glTranslatef(position.x, position.y, position.z);
+        for (Terrain tr[] : m.field) {
+            for (Terrain t : tr) {
+                if (t != null) {
+                    glBegin(GL_TRIANGLES);
+                        for (Face f : t.mesh.faces) {
+                            t.material.t.bind();
+                            Vector3f v1 = t.mesh.verts.get((int)f.v.x);
+                            Vector3f v2 = t.mesh.verts.get((int)f.v.y);
+                            Vector3f v3 = t.mesh.verts.get((int)f.v.z);
+                            Vector2f t1 = t.mesh.tex.get((int)f.t.x);
+                            Vector2f t2 = t.mesh.tex.get((int)f.t.y);
+                            Vector2f t3 = t.mesh.tex.get((int)f.t.z);
+                            glTexCoord2f(t1.x, t1.y);
+                            glVertex3f(v1.x, v1.y, v1.z);
+                            glTexCoord2f(t2.x, t2.y);
+                            glVertex3f(v2.x, v2.y, v2.z);
+                            glTexCoord2f(t3.x, t3.y);
+                            glVertex3f(v3.x, v3.y, v3.z);
+                        }
+                    glEnd();
+                }
+            }
+        }
         return this;
     }
     
