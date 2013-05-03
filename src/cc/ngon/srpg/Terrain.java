@@ -4,6 +4,8 @@
  */
 package cc.ngon.srpg;
 
+import cc.ngon.Config;
+import cc.ngon.L;
 import cc.ngon.srpg.gfx.*;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
@@ -17,15 +19,31 @@ public class Terrain extends Node {
     
     public Terrain(Map m, TerrainInfo t, Vector3f position) {
         this.map = m;
-        this.info = t;
-        this.position = position;
+        this.info = new TerrainInfo(t);
+        this.position = new Vector3f(position);
         this.mesh = genMesh();
         this.material = new Material(t.texture);
     }
     
     private Mesh genMesh() {
         Mesh m = new Mesh();
-        m.verts.add(new Vector3f(position.x, position.y, position.z));      //v0
+        float xx = position.x * info.size.x;
+        float yy = position.y * info.size.y;
+        L.p(xx + "," + yy);
+        m.verts.add(new Vector3f(xx, yy, 0));
+        m.verts.add(new Vector3f(xx + info.size.x, yy, 0));
+        m.verts.add(new Vector3f(xx + info.size.x, yy + info.size.y, 0));
+        m.verts.add(new Vector3f(xx, yy + info.size.y, 0));
+        
+        m.tex.add(new Vector2f(0, 0));
+        m.tex.add(new Vector2f(1, 0));
+        m.tex.add(new Vector2f(1, 1));
+        m.tex.add(new Vector2f(0, 1));
+        
+        m.faces.add(new Face(new Vector3f(3, 2, 1), null, new Vector3f(3, 2, 1)));
+        m.faces.add(new Face(new Vector3f(4, 3, 1), null, new Vector3f(4, 3, 1)));
+        // <editor-fold defaultstate="collapsed" desc="3D Model Code">
+        /*m.verts.add(new Vector3f(position.x, position.y, position.z));      //v0
         m.verts.add(new Vector3f(position.x + 1, position.y, position.z));  //v1
         m.verts.add(new Vector3f(position.x + 1, position.y + 1, position.z)); //v2
         m.verts.add(new Vector3f(position.x, position.y + 1, position.z));  //v3
@@ -50,8 +68,14 @@ public class Terrain extends Node {
         m.faces.add(new Face(new Vector3f(5, 4, 1), null, new Vector3f(4, 5, 2)));
         m.faces.add(new Face(new Vector3f(4, 0, 1), null, new Vector3f(5, 3, 2)));
         m.faces.add(new Face(new Vector3f(4, 3, 0), null, new Vector3f(4, 3, 2)));
-        m.faces.add(new Face(new Vector3f(4, 7, 3), null, new Vector3f(4, 5, 3)));
+        m.faces.add(new Face(new Vector3f(4, 7, 3), null, new Vector3f(4, 5, 3)));*/
+        // </editor-fold>
         return m;
+    }
+    
+    @Override
+    public String toString() {
+        return position.toString();
     }
 
     TerrainInfo info;
@@ -81,12 +105,22 @@ public class Terrain extends Node {
         float impediment;
         float defense;
         Texture texture;
+        Vector2f size;
         
         public TerrainInfo(float impediment, float defense, boolean weather, Texture texture) {
             this.impediment = impediment;
             this.defense = defense;
             this.weather = weather;
             this.texture = texture;
+            this.size = new Vector2f(Config.getInt("game", "tileWidth"), Config.getInt("game", "tileHeight"));
+        }
+        
+        public TerrainInfo(TerrainInfo tinf) {
+            this.impediment = tinf.impediment;
+            this.defense = tinf.defense;
+            this.weather = tinf.weather;
+            this.texture = tinf.texture;
+            this.size = new Vector2f(tinf.size);
         }
     }
 }

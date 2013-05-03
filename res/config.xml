@@ -8,4 +8,8 @@
 		<property name="scrHeight">480</property>
 		<property name="fps">60</property>
 	</propertyGroup>
+	<propertyGroup name="game">
+		<property name="tileWidth">32</property>
+		<property name="tileHeight">32</property>
+	</propertyGroup>
 </config>

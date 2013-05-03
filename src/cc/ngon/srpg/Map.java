@@ -17,6 +17,7 @@ public class Map {
         field = new Terrain[width][height];
         actors = new Entity[width][height];
         camera = new Camera();
+        camera.initGL();
     }
 
     public void update() {

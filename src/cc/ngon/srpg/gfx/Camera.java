@@ -4,11 +4,13 @@
  */
 package cc.ngon.srpg.gfx;
 
+import cc.ngon.L;
 import cc.ngon.srpg.*;
 import org.lwjgl.util.vector.Vector3f;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.*;
 import org.lwjgl.util.vector.Vector2f;
+import org.newdawn.slick.Color;
 
 public class Camera {
     
@@ -57,37 +59,33 @@ public class Camera {
     public Camera initGL() {
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(angle, aspect, znear, zfar);
+        glOrtho(0, 640, 480, 0, 1, -1);
         glMatrixMode(GL_MODELVIEW);
-        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_TEXTURE_2D);
         return this;
     }
     
     public Camera renderMap(Map m) {
-        glLoadIdentity();
-        glRotatef(rotation.x, 1, 0, 0);
-        glRotatef(rotation.y, 0, 1, 0);
-        glRotatef(rotation.z, 0, 0, 1);
-        glTranslatef(position.x, position.y, position.z);
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glTranslatef(position.x, position.y, 0);
         for (Terrain tr[] : m.field) {
             for (Terrain t : tr) {
                 if (t != null) {
                     glBegin(GL_TRIANGLES);
                         for (Face f : t.mesh.faces) {
                             t.material.t.bind();
-                            Vector3f v1 = t.mesh.verts.get((int)f.v.x);
-                            Vector3f v2 = t.mesh.verts.get((int)f.v.y);
-                            Vector3f v3 = t.mesh.verts.get((int)f.v.z);
-                            Vector2f t1 = t.mesh.tex.get((int)f.t.x);
-                            Vector2f t2 = t.mesh.tex.get((int)f.t.y);
-                            Vector2f t3 = t.mesh.tex.get((int)f.t.z);
+                            Vector3f v1 = t.mesh.verts.get((int)f.v.x - 1);
+                            Vector3f v2 = t.mesh.verts.get((int)f.v.y - 1);
+                            Vector3f v3 = t.mesh.verts.get((int)f.v.z - 1);
+                            Vector2f t1 = t.mesh.tex.get((int)f.t.x - 1);
+                            Vector2f t2 = t.mesh.tex.get((int)f.t.y - 1);
+                            Vector2f t3 = t.mesh.tex.get((int)f.t.z - 1);
                             glTexCoord2f(t1.x, t1.y);
-                            glVertex3f(v1.x, v1.y, v1.z);
+                            glVertex2f(v1.x, v1.y);
                             glTexCoord2f(t2.x, t2.y);
-                            glVertex3f(v2.x, v2.y, v2.z);
+                            glVertex2f(v2.x, v2.y);
                             glTexCoord2f(t3.x, t3.y);
-                            glVertex3f(v3.x, v3.y, v3.z);
+                            glVertex2f(v3.x, v3.y);
                         }
                     glEnd();
                 }
