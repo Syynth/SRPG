@@ -29,11 +29,11 @@ public class Terrain extends Node {
         Mesh m = new Mesh();
         float xx = position.x * info.size.x;
         float yy = position.y * info.size.y;
-        L.p(xx + "," + yy);
-        m.verts.add(new Vector3f(xx, yy, 0));
-        m.verts.add(new Vector3f(xx + info.size.x, yy, 0));
-        m.verts.add(new Vector3f(xx + info.size.x, yy + info.size.y, 0));
-        m.verts.add(new Vector3f(xx, yy + info.size.y, 0));
+        L.p(position.x + "," + position.y);
+        m.verts.add(new Vector2f(xx, yy));
+        m.verts.add(new Vector2f(xx + info.size.x, yy));
+        m.verts.add(new Vector2f(xx + info.size.x, yy + info.size.y));
+        m.verts.add(new Vector2f(xx, yy + info.size.y));
         
         m.tex.add(new Vector2f(0, 0));
         m.tex.add(new Vector2f(1, 0));
@@ -78,8 +78,8 @@ public class Terrain extends Node {
         return position.toString();
     }
 
-    TerrainInfo info;
-    Vector3f position;
+    public TerrainInfo info;
+    public Vector3f position;
     Map map;
 
     public static final int FLOOR_ID = 0;

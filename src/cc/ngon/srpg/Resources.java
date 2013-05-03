@@ -70,7 +70,7 @@ public final class Resources {
                 float x = Float.valueOf(line.split(" ")[1]);
                 float y = Float.valueOf(line.split(" ")[2]);
                 float z = Float.valueOf(line.split(" ")[3]);
-                m.verts.add(new Vector3f(x, y, z));
+                //m.verts.add(new Vector3f(x, y, z));
             } else if (line.startsWith("vn ")) {
                 float x = Float.valueOf(line.split(" ")[1]);
                 float y = Float.valueOf(line.split(" ")[2]);

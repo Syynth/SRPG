@@ -18,7 +18,7 @@ public class Mesh {
         faces = new ArrayList<>();
     }
     
-    public List<Vector3f> verts;
+    public List<Vector2f> verts;
     public List<Vector3f> norms;
     public List<Vector2f> tex;
     public List<Face> faces;
