@@ -9,7 +9,7 @@
 		<property name="fps">60</property>
 	</propertyGroup>
 	<propertyGroup name="game">
-		<property name="tileWidth">32</property>
-		<property name="tileHeight">32</property>
+		<property name="tileWidth">16</property>
+		<property name="tileHeight">16</property>
 	</propertyGroup>
 </config>
