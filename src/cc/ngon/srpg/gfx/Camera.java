@@ -68,14 +68,12 @@ public class Camera {
     public Camera renderMap(Map m) {
         glTranslatef(position.x, position.y, 0);
         glClear(GL_COLOR_BUFFER_BIT);
-        L.p("Start");
         for (Terrain tr[] : m.field) {
             for (Terrain t : tr) {
                 if (t != null) {
-                    L.p("good terrain");
+                    t.material.t.bind();
                     glBegin(GL_TRIANGLES);
                         for (Face f : t.mesh.faces) {
-                            t.material.t.bind();
                             Vector2f v1 = t.mesh.verts.get((int)f.v.x - 1);
                             Vector2f v2 = t.mesh.verts.get((int)f.v.y - 1);
                             Vector2f v3 = t.mesh.verts.get((int)f.v.z - 1);
@@ -91,11 +89,9 @@ public class Camera {
                         }
                     glEnd();
                 } else {
-                    L.p("null terrain");
                 }
             }
         }
-        L.p("End");
         return this;
     }
     

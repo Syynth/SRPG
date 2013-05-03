@@ -27,7 +27,7 @@ public abstract class MapBuilder {
             }
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("t ")) {
-                    m.field[(int)f(line.split(" ")[1])][(int)f(line.split(" ")[2])] = getNewTerrain(line, m);
+                    m.field[(int)f(line.split(" ")[2])][(int)f(line.split(" ")[3])] = getNewTerrain(line, m);
                 }
             }
             

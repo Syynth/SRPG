@@ -89,7 +89,7 @@ public class Terrain extends Node {
     public static final TerrainInfo GROUND_INFO = new TerrainInfo(1, 0, true, Resources.getTexture("grass_terrain_tex"));
     
     public static final int WALL_ID = 2;
-    public static final TerrainInfo WALL_INFO = new TerrainInfo(999, 999, false, Resources.getTexture("grass_terrain_tex"));
+    public static final TerrainInfo WALL_INFO = new TerrainInfo(999, 999, false, Resources.getTexture("sand_terrain_tex"));
     
     public static final int NULL_ID = 3;
     public static final TerrainInfo NULL_INFO = new TerrainInfo(999, 999, false, Resources.getTexture("grass_terrain_tex"));
